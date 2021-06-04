@@ -13,12 +13,13 @@
         Ifootball
       </div>
     </div>
-    <div class="form-login">
+    <div class="form-signup">
       <v-text-field
         v-model="user.username"
-        class="username-input"
-        label="Username"
-        placeholder="Username"
+        class="email-input"
+        label="username"
+        placeholder="username"
+        type="text"
         required
       />
       <v-text-field
@@ -28,29 +29,28 @@
         type="password"
         required
       />
+      <v-text-field
+        v-model="user.email"
+        label="Email"
+        placeholder="Email"
+        required
+      />
+      <v-text-field
+        v-model="user.phoneNumber"
+        label="Phone Number"
+        placeholder="PhoneNumber"
+        type="number"
+        required
+      />
       <v-btn
-        class="justify-center mt-5 btn-login"
+        class="justify-center mt-5 btn-signup"
         color="primary"
         elevation="7"
         rounded
-        @click.prevent="login"
+        @click.prevent="signup"
       >
-        Sign in
+        Sign up
       </v-btn>
-      <div class="d-flex justify-space-between">
-        <div
-          class="register-password mt-4"
-          @click="registerAccount"
-        >
-          Register
-        </div>
-        <div
-          class="forgot-password mt-4"
-          @click="forgotPassword"
-        >
-          Forgot password?
-        </div>
-      </div>
     </div>
   </v-card>
 </template>
@@ -61,26 +61,26 @@
         user: {
           username: null,
           password: null,
+          email: null,
+          phoneNumber: null,
         },
       }
     },
     methods: {
-      forgotPassword () {
-        this.$router.push({ path: '/forgot-password' })
-      },
-      registerAccount () {
-        this.$router.push({ path: '/register-account' })
-      },
-      async login () {
+      async signup () {
         const request = {
           username: this.user.username ? this.user.username : null,
           password: this.user.password ? this.user.password : null,
+          email: this.user.email ? this.user.email : null,
+          phoneNumber: this.user.phoneNumber ? this.user.phoneNumber : null,
+          roleId: 2,
         }
-        const response = await this.$store.dispatch('auth/login', request)
-        console.log('Login response', response)
+        const response = await this.$store.dispatch('auth/register', request)
+        console.log('response', response)
         if (response.data) {
+          alert('Sign up successed! Lets sign in with your account')
           this.$cookies.set('Authorization', response.data)
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: '/login' })
         }
       },
     },
@@ -109,14 +109,14 @@
     font-family: system-ui;
     letter-spacing: 2px;
 }
-.form-login {
+.form-signup {
     width: 400px;
     padding: 20px;
 }
-.username-input {
+.email-input {
     margin-top: 100px;
 }
-.btn-login {
+.btn-signup {
     width: 100% !important;
     font-size: 1rem;
     font-weight: 800;
@@ -127,23 +127,5 @@
     margin-top: 30px;
     font-size: 16px;
     color: gray;
-}
-.social-network {
-    text-align: center;
-    margin-top: 30px;
-}
-.forgot-password {
-    color: gray;
-    cursor: pointer;
-}
-.forgot-password:hover {
-    color: rgb(14, 110, 140);
-}
-.register-password {
-    color: gray;
-    cursor: pointer;
-}
-.register-password:hover {
-    color: rgb(14, 110, 140);
 }
 </style>

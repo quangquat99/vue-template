@@ -3,8 +3,13 @@ import axiosInstance from '../../../plugins/axios'
 const BASE_URL = process.env.VUE_APP_BASE_URL
 
 export async function login (request) {
-  const response = await axios.post(`${BASE_URL}/user/login`, request)
+  const response = await axios.post(`${BASE_URL}/login`, request)
   return response
+}
+
+export async function register (request) {
+  const response = await axios.post(`${BASE_URL}/user/register`, request)
+  return response.data
 }
 
 export async function changePassword (request) {

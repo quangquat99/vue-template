@@ -11,19 +11,12 @@
         Reset password
       </h1>
       <div class="mt-5 text-2">
-        enter the email and username associated with your account and
+        Enter the email associated with your account and
         we'll send an email with instructions to reset your password.
       </div>
     </div>
 
     <div class="form-login">
-      <v-text-field
-        class="username-input"
-        label="Username"
-        placeholder="Username"
-        type="text"
-        required
-      />
       <v-text-field
         label="Email"
         placeholder="Email"
@@ -37,7 +30,7 @@
         rounded
         @click="sendEmailReset"
       >
-        send email reset
+        Send email reset
       </v-btn>
     </div>
   </v-card>

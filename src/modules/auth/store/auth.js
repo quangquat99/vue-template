@@ -1,4 +1,4 @@
-import { login, changePassword, getProfile } from '../service/index'
+import { login, register, changePassword, getProfile } from '../service/index'
 
 const state = {
   userProfile: {},
@@ -15,6 +15,10 @@ const actions = {
   async login (context, request) {
     const response = await login(request)
     return response.data
+  },
+  async register (context, request) {
+    const response = await register(request)
+    return response
   },
   async changePassword (context, request) {
     const response = await changePassword(request)

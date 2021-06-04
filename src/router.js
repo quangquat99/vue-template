@@ -80,5 +80,10 @@ export default new Router({
       component: () => import('@/views/dashboard/ForgotPassword.vue'),
       name: 'forgot-password',
     },
+    {
+      path: '/register-account',
+      component: () => import('@/views/dashboard/RegisterAccount.vue'),
+      name: 'register-account',
+    },
   ],
 })
